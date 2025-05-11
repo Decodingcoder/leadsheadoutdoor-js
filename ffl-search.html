@@ -3,33 +3,20 @@
 <head>
   <meta charset="utf-8">
   <title>FFL Search</title>
-  <!-- 1) SDK must load first -->
+
+  <!-- 1) Load Google Maps JS properly for best practice -->
+  <script
+    async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k&callback=FFL.initGMap">
+  </script>
+
+  <!-- 2) Load the FFL widget SDK next -->
   <script src="https://app.fflapi.com/sdk/widget.js"></script>
-  <!-- 2) Then your init file -->
+
+  <!-- 3) Finally, your init script -->
   <script src="https://Decodingcoder.github.io/leadsheadoutdoor-js/ffl-init.js"></script>
 </head>
 <body>
-  <input id="ffl-query" placeholder="Enter city or license…">
-  <button id="ffl-btn">Search</button>
   <div id="ffl_container"></div>
-
-  <!-- 3) Hook up the click event -->
-  <script>
-    document.getElementById('ffl-btn').onclick = function() {
-      console.log('clicked');  // <<— add this to verify the handler runs
-      var term = document.getElementById('ffl-query').value;
-      FFL.search({
-        term: term,
-        apiKey: 'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
-        geoKey: 'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k'
-      })
-      .then(function(data) {
-        document.getElementById('ffl_container').innerHTML =
-          data.map(function(i){
-            return '<div>'+ i.license_name +' — '+ i.premise_state +'</div>';
-          }).join('');
-      });
-    };
-  </script>
 </body>
 </html>
