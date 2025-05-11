@@ -1,13 +1,8 @@
-// ffl-init.js
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   FFL.init({
     container: 'ffl_container',
-    apiKey:    'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
-    geoKey:    'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k',
-    cBack:     getSelected
+    apiKey: 'YOUR_API_KEY',
+    geoKey: 'YOUR_MAPS_KEY',
+    cBack: (data) => console.log('chosen dealer:', data)
   });
 });
-
-function getSelected(data) {
-  console.log('FFL callback data:', data);
-}
