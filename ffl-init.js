@@ -1,9 +1,9 @@
 //add before our js sdk your page's b body tag
-<script src="https://app.fflapi.com/sdk/widget.js"></script>
+
 
 //add that script and initialize widget with parameters
 
-<script type="text/javascript">
+
 
     FFL.init({
         container : 'ffl_container', // container id
@@ -23,4 +23,4 @@
         let voice_phone = data.voice_phone;
     }
 
-</script>
+
