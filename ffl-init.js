@@ -7,8 +7,9 @@
 
     FFL.init({
         container : 'ffl_container', // container id
-        apiKey: 'Your API Key', // your API Key
-        geoKey: 'Your own Google Maps API Key', // Make sure you have Google Maps API Key
+        apiKey: 'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07
+', // your API Key
+        geoKey: 'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k', // Make sure you have Google Maps API Key
         cBack : getSelected // callback function
     });
 
