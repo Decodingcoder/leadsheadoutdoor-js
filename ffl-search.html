@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>FFL Search</title>
-  <!-- 1) SDK -->
+  <!-- 1) SDK must load first -->
   <script src="https://app.fflapi.com/sdk/widget.js"></script>
-  <!-- 2) Your init code (pure JS) -->
+  <!-- 2) Then your init file -->
   <script src="https://Decodingcoder.github.io/leadsheadoutdoor-js/ffl-init.js"></script>
 </head>
 <body>
@@ -13,20 +13,20 @@
   <button id="ffl-btn">Search</button>
   <div id="ffl_container"></div>
 
-  <!-- 3) Hook up the search button -->
+  <!-- 3) Hook up the click event -->
   <script>
     document.getElementById('ffl-btn').onclick = function() {
+      console.log('clicked');  // <<— add this to verify the handler runs
       var term = document.getElementById('ffl-query').value;
-      // perform search; FFL.search is provided by the SDK
       FFL.search({
         term: term,
         apiKey: 'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
         geoKey: 'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k'
       })
-      .then(function(data){
+      .then(function(data) {
         document.getElementById('ffl_container').innerHTML =
           data.map(function(i){
-            return '<div>' + i.license_name + ' — ' + i.premise_state + '</div>';
+            return '<div>'+ i.license_name +' — '+ i.premise_state +'</div>';
           }).join('');
       });
     };
