@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>FFL Search</title>
+  <script src="https://app.fflapi.com/sdk/widget.js"></script>
+  <script src="https://username.github.io/repo/ffl-init.js"></script>
+</head>
+<body>
+  <input id="ffl-query" placeholder="Enter city or license…">
+  <button id="ffl-btn">Search</button>
+  <div id="ffl_container"></div>
+  <script>
+    document.getElementById('ffl-btn').onclick = function() {
+      var term = document.getElementById('ffl-query').value;
+      FFL.search({ term: term, apiKey: 'YOUR_KEY', geoKey: 'YOUR_MAPS_KEY' })
+         .then(function(data){
+           document.getElementById('ffl_container').innerHTML =
+             data.map(function(i){
+               return '<div>'+ i.license_name +' — '+ i.premise_state +'</div>';
+             }).join('');
+         });
+    };
+  </script>
+</body>
+</html>
