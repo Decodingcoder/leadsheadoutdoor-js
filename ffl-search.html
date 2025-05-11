@@ -13,7 +13,8 @@
   <script>
     document.getElementById('ffl-btn').onclick = function() {
       var term = document.getElementById('ffl-query').value;
-      FFL.search({ term: term, apiKey: 'YOUR_KEY', geoKey: 'YOUR_MAPS_KEY' })
+      FFL.search({ term: term, apiKey: 'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07
+', geoKey: 'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k' })
          .then(function(data){
            document.getElementById('ffl_container').innerHTML =
              data.map(function(i){
