@@ -5,34 +5,35 @@
   <title>FFL Search</title>
 
   <script>
-    // This function will be called by the SDK when it loads Maps
-    window.defineAndRunFFL = function() {
-      if (!window.FFL) {
-        console.error('⚠️ FFL SDK not found');
-        return;
+    function defineAndRunFFL() {
+      // 1) Wait for both FFL and the container
+      function tryInit() {
+        var container = document.getElementById('ffl_container');
+        if (window.FFL && container) {
+          console.log('▶ Running FFL.init after both SDK & container ready');
+          FFL.init({
+            container: 'ffl_container',
+            apiKey:    'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
+            geoKey:    'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k',
+            cBack:     data => console.log('📦 dealer data:', data)
+          });
+        } else {
+          // retry shortly
+          setTimeout(tryInit, 50);
+        }
       }
-      // Define the Maps callback
-      FFL.initGMap = function() {
-        console.log('▶ running FFL.initGMap');
-        FFL.init({
-          container: 'ffl_container',
-          apiKey:    'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
-          geoKey:    'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k',
-          cBack:     data => console.log('📦 dealer data:', data)
-        });
-      };
-      // Immediately invoke it—this covers both SDK‐loaded‐early and SDK‐loaded‐late cases
-      FFL.initGMap();
-    };
+      tryInit();
+    }
   </script>
 
-  <!-- Load the widget SDK; it will call defineAndRunFFL() automatically when it injects Maps -->
+  <!-- Load the widget SDK; when it’s done, call our function -->
   <script
     src="https://app.fflapi.com/sdk/widget.js"
     onload="defineAndRunFFL()">
   </script>
 </head>
 <body>
+  <!-- This must exist before we call FFL.init -->
   <div id="ffl_container" style="min-height:300px;border:1px solid #ccc;"></div>
 </body>
 </html>
