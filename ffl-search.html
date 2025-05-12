@@ -3,34 +3,29 @@
 <head>
   <meta charset="utf-8">
   <title>FFL Search</title>
+  <style>
+    #ffl_container { width:100%; min-height:400px; border:1px solid #ddd; }
+  </style>
 
   <script>
-    // This creates the callback _and_ loads the SDK
     window.defineFFLInitGMap = function() {
+      console.log('▶ defineFFLInitGMap called');
+      if (!window.FFL) {
+        console.error('⛔ FFL SDK not present');
+        return;
+      }
       FFL.initGMap = function() {
+        console.log('▶ FFL.initGMap running');
         FFL.init({
           container: 'ffl_container',
           apiKey:    'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
           geoKey:    'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k',
-          cBack:     data => console.log('dealer selected:', data)
+          cBack:     data => console.log('✓ dealer:', data)
         });
       };
     };
   </script>
-
-  <script
-    src="https://app.fflapi.com/sdk/widget.js"
-    onload="defineFFLInitGMap()">
-  </script>
-
-<style>
-  #ffl_container {
-    width: 100%;
-    min-height: 400px;
-    border: 1px solid #ddd;
-  }
-</style>
-  
+  <script src="https://app.fflapi.com/sdk/widget.js" onload="defineFFLInitGMap()"></script>
 </head>
 <body>
   <div id="ffl_container"></div>
