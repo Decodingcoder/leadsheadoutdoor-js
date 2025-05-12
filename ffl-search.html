@@ -4,19 +4,9 @@
   <meta charset="utf-8">
   <title>FFL Search</title>
 
-  <!-- 1) Load the FFL widget SDK, then call defineFFLInitGMap -->
-  <script
-    src="https://app.fflapi.com/sdk/widget.js"
-    onload="defineFFLInitGMap()">
-  </script>
-
-  <!-- 2) Define the initGMap callback for the SDK -->
   <script>
-    function defineFFLInitGMap() {
-      if (!window.FFL) {
-        console.error('FFL SDK failed to load.');
-        return;
-      }
+    // This creates the callback _and_ loads the SDK
+    window.defineFFLInitGMap = function() {
       FFL.initGMap = function() {
         FFL.init({
           container: 'ffl_container',
@@ -25,11 +15,15 @@
           cBack:     data => console.log('dealer selected:', data)
         });
       };
-    }
+    };
+  </script>
+
+  <script
+    src="https://app.fflapi.com/sdk/widget.js"
+    onload="defineFFLInitGMap()">
   </script>
 </head>
 <body>
-  <!-- 3) Placeholder for the widget’s UI -->
   <div id="ffl_container"></div>
 </body>
 </html>
