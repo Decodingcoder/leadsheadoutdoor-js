@@ -4,13 +4,32 @@
   <meta charset="utf-8">
   <title>FFL Search</title>
 
-  <!-- 1) YOUR initGMap first -->
-  <script src="https://Decodingcoder.github.io/leadsheadoutdoor-js/ffl-init.js"></script>
+  <!-- 1) Load the FFL widget SDK, then call defineFFLInitGMap -->
+  <script
+    src="https://app.fflapi.com/sdk/widget.js"
+    onload="defineFFLInitGMap()">
+  </script>
 
-  <!-- 2) Then load the widget SDK -->
-  <script src="https://app.fflapi.com/sdk/widget.js"></script>
+  <!-- 2) Define the initGMap callback for the SDK -->
+  <script>
+    function defineFFLInitGMap() {
+      if (!window.FFL) {
+        console.error('FFL SDK failed to load.');
+        return;
+      }
+      FFL.initGMap = function() {
+        FFL.init({
+          container: 'ffl_container',
+          apiKey:    'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
+          geoKey:    'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k',
+          cBack:     data => console.log('dealer selected:', data)
+        });
+      };
+    }
+  </script>
 </head>
 <body>
+  <!-- 3) Placeholder for the widget’s UI -->
   <div id="ffl_container"></div>
 </body>
 </html>
