@@ -3,31 +3,36 @@
 <head>
   <meta charset="utf-8">
   <title>FFL Search</title>
-  <style>
-    #ffl_container { width:100%; min-height:400px; border:1px solid #ddd; }
-  </style>
 
   <script>
-    window.defineFFLInitGMap = function() {
-      console.log('▶ defineFFLInitGMap called');
+    // This function will be called by the SDK when it loads Maps
+    window.defineAndRunFFL = function() {
       if (!window.FFL) {
-        console.error('⛔ FFL SDK not present');
+        console.error('⚠️ FFL SDK not found');
         return;
       }
+      // Define the Maps callback
       FFL.initGMap = function() {
-        console.log('▶ FFL.initGMap running');
+        console.log('▶ running FFL.initGMap');
         FFL.init({
           container: 'ffl_container',
           apiKey:    'V5ThVSNeQHwXMLESio6ed7HE9JwyEacfRe7TtOJR458y0GnhsZU7xMwkhyvKKRRz6814c201e7b07',
           geoKey:    'AIzaSyBeWDDQUtesS9aAYT7Y4BSw_MCv6ItnS4k',
-          cBack:     data => console.log('✓ dealer:', data)
+          cBack:     data => console.log('📦 dealer data:', data)
         });
       };
+      // Immediately invoke it—this covers both SDK‐loaded‐early and SDK‐loaded‐late cases
+      FFL.initGMap();
     };
   </script>
-  <script src="https://app.fflapi.com/sdk/widget.js" onload="defineFFLInitGMap()"></script>
+
+  <!-- Load the widget SDK; it will call defineAndRunFFL() automatically when it injects Maps -->
+  <script
+    src="https://app.fflapi.com/sdk/widget.js"
+    onload="defineAndRunFFL()">
+  </script>
 </head>
 <body>
-  <div id="ffl_container"></div>
+  <div id="ffl_container" style="min-height:300px;border:1px solid #ccc;"></div>
 </body>
 </html>
